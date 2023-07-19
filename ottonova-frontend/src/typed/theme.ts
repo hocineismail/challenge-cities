@@ -3,7 +3,8 @@ export interface Theme {
         primaryBackground: string,
         secondaryBackground: string,
         primaryText: string,
-        secondaryText: string
+        secondaryText: string,
+        light: string,
     };
 
 }

@@ -5,7 +5,8 @@ export const ligthTheme: Theme = {
         primaryBackground: "#0077FF",
         secondaryBackground: "#fff",
         primaryText: "#00104B",
-        secondaryText: "#667093"
+        secondaryText: "#667093",
+        light: "#fff"
     }
 
 }
