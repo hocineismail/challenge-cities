@@ -9,8 +9,6 @@ import CardsSectionPlaceholder from "../loader/CardsPlaceholder";
 //NOTICE: if you don't add it, it will use http://localhost:8080/
 //Make sure the backend is running on the same port.
 
-const API = process.env.REACT_APP_API || "http://localhost:8080/api/v1";
-
 // Styled component representing the grid layout for the cards
 const StyledCardsSection = styled.div`
   display: grid;
@@ -41,7 +39,7 @@ export default function CitiesSection() {
     isLoading,
     errors,
   } = useFetchDataFromUrl<{ cities: City[] }>({
-    url: `${API}/cities`,
+    url: `/cities.json`,
   });
 
   // Render placeholders when loading

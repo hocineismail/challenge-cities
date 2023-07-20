@@ -17,7 +17,7 @@ export interface AppAction {
 }
 export const appState: AppInit = {
     city: null,
-    isModalVisible: true,
+    isModalVisible: false,
     theme: null
 };
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
