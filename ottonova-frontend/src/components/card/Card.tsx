@@ -4,6 +4,9 @@ import CardActions from "./CardActions";
 import CardContent from "./CardContent";
 import CardHeader from "./CardHeader";
 import { LiaCitySolid } from "react-icons/lia";
+import React from "react";
+import { AppContext } from "../../store/context";
+import { OPEN_MODAL } from "../../constants/store";
 
 const StyledCard = styled.div`
   border: 1px solid ${({ theme }) => theme.colors.secondaryText};
@@ -17,20 +20,36 @@ interface Props {
   name_native: string;
   country: string;
   continent: string;
-  //   latitude: number;
-  //   longitude: number;
+  latitude: string;
+  longitude: string;
 }
 export default function Card({
   name,
   name_native,
   country,
   continent,
-  //   latitude,
-  //   longitude,
+  latitude,
+  longitude,
   population,
   founded,
   landmarks,
 }: Props) {
+  const { dispatch } = React.useContext(AppContext);
+  const handleClick = () =>
+    dispatch({
+      type: OPEN_MODAL,
+      payload: {
+        name,
+        name_native,
+        country,
+        continent,
+        latitude,
+        longitude,
+        population,
+        founded,
+        landmarks,
+      },
+    });
   return (
     <StyledCard data-test-id="card">
       <CardHeader
@@ -45,7 +64,7 @@ export default function Card({
         marks={landmarks}
       />
       <CardActions>
-        <Button text="Show" />
+        <Button text="Show" handleClick={handleClick} />
       </CardActions>
     </StyledCard>
   );

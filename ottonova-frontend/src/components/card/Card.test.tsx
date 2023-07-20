@@ -22,6 +22,8 @@ describe("Render Full Card component", () => {
     continent: "continent",
     population: "120",
     founded: "100",
+    latitude: "100",
+    longitude: "100",
     landmarks: ["mark1", "mark2"],
   };
 
