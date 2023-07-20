@@ -1,3 +1,4 @@
+
 import React from 'react'
 
 
@@ -12,9 +13,15 @@ import React from 'react'
 interface Props {
     url: string
 }
+interface ApiResponse<T> {
+    data: T | undefined;
+    isLoading: boolean;
+    errors: string | null;
+}
+export default function useFetchDataFromUrl<T>({ url }: Props): ApiResponse<T> {
 
-export default function useFetchDataFromUrl({ url }: Props) {
-    const [data, setData] = React.useState<any>([]);
+    const [data, setData] = React.useState<T | undefined>(undefined);
+
     const [isLoading, setIsLoading] = React.useState<boolean>(true);
     const [errors, setErrors] = React.useState<string | null>(null);
     React.useEffect(() => {

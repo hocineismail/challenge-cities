@@ -5,6 +5,12 @@ import Card from "../card/Card";
 import { City } from "../../typed/cities";
 import CardsSectionPlaceholder from "../loader/CardsPlaceholder";
 
+//make sur to add your api on .env
+//NOTICE: if you don't add it, it will use http://localhost:8080/
+//Make sure the backend is running on the same port.
+
+const API = process.env.REACT_APP_API || "http://localhost:8080/api/v1";
+
 // Styled component representing the grid layout for the cards
 const StyledCardsSection = styled.div`
   display: grid;
@@ -29,20 +35,29 @@ const placeholders = Array.from({ length: 8 }, (_, index) => (
 // Main component for rendering the cities section
 export default function CitiesSection() {
   // Fetch data from a specified URL using a custom hook
-  const { data, isLoading, errors } = useFetchDataFromUrl({ url: "heloo" });
+
+  const {
+    data: { cities } = { cities: [] },
+    isLoading,
+    errors,
+  } = useFetchDataFromUrl<{ cities: City[] }>({
+    url: `${API}/cities`,
+  });
 
   // Render placeholders when loading
   if (isLoading) return <StyledCardsSection>{placeholders}</StyledCardsSection>;
 
   // Render error message if there are errors
-  // type danger or default
+
+  // type="danger" to display red alert
+
   if (errors) return <Alert text={errors} type="danger" />;
 
   // Render the grid of city cards if data is available
   return (
     <StyledCardsSection>
-      {data &&
-        data.map((item: City) => {
+      {cities &&
+        cities.map((item: City) => {
           return <Card key={item.name} {...item} />;
         })}
     </StyledCardsSection>

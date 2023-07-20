@@ -9,6 +9,7 @@ interface ThemeProps {
 //   theme: DefaultTheme; // Import DefaultTheme from styled-components
 // }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const GlobalStyles = createGlobalStyle<ThemeProps | any>`
  html, body {
     margin: 0;
