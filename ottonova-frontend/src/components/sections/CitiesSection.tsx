@@ -2,15 +2,16 @@ import styled from "styled-components";
 import useFetchDataFromUrl from "../../hooks/useFetchDataFromUrl";
 import Alert from "../alert/Alert";
 import Card from "../card/Card";
-import { City } from "../../typed/cities";
+
 import CardsSectionPlaceholder from "../loader/CardsPlaceholder";
-import React from "react";
+
+import { City } from "../../typed/cities";
 
 //make sur to add your api on .env
 //NOTICE: if you don't add it, it will use http://localhost:8080/
 //Make sure the backend is running on the same port.
 
-const API = process.env.REACT_APP_API || "http://localhost:8080";
+const API = process.env.REACT_APP_API || "http://localhost:8080/api/v1/";
 
 // Styled component representing the grid layout for the cards
 const StyledCardsSection = styled.div`

@@ -10,13 +10,13 @@ interface Style {
   type?: string | undefined;
 }
 const StyledButton = styled.button<Style>`
-  background: ${({ theme }) => theme.colors.primaryBackground};
-  color: ${({ theme }) => theme.colors.light};
+  background: ${({ theme }) => theme.colors.button};
+  color: ${({ theme }) => theme.colors.textButton};
   height: 45px;
   width: 100%;
   min-width: 100px;
   max-width: 400px;
-
+  font-size: 18px;
   border-radius: 14px;
   border-color: transparent;
   cursor: pointer;

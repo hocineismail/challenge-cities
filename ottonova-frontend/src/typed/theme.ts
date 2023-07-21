@@ -1,10 +1,13 @@
 export interface Theme {
     colors: {
-        primaryBackground: string,
-        secondaryBackground: string,
-        primaryText: string,
-        secondaryText: string,
-        light: string,
+
+        text: string,
+        background: string,
+        button: string,
+        primary: string,
+        secondary: string,
+        gray: string,
+        textButton: string
     };
 
 }

@@ -66,7 +66,7 @@ const StyledHr = styled.hr`
 
 // Styled component for the card container
 const StyledCard = styled.div`
-  border: 1px solid ${({ theme }) => theme.colors.secondaryText};
+  border: 1px solid ${({ theme }) => theme.colors.gray};
   border-radius: 10px;
   padding: 20px;
 `;

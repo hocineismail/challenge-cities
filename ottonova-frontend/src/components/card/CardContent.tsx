@@ -37,7 +37,7 @@ export default function CardContent({
 }: Props) {
   return (
     <StyledCardContent>
-      <Text>{city}</Text>
+      <BoldText>{city}</BoldText>
       <Text>
         <BoldText>Founded: </BoldText>
         {founded}

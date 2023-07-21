@@ -28,7 +28,7 @@ const StyledSubTitle = styled.h3`
 const StyledHr = styled.hr`
   border: none;
   height: 1px;
-  background-color: #d7d7d7;
+  background-color: ${({ theme }) => theme.colors.gray};
   margin: 0px 10px;
 `;
 export default function CardHeader({ icon, title, subTitle }: Props) {
