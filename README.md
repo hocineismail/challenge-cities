@@ -1,4 +1,4 @@
-# Solution: [#Demo](https://64b98e41c8d23d000770dd96--famous-palmier-e79f2f.netlify.app/)
+# Solution: [#Demo](https://deploy-dev--famous-palmier-e79f2f.netlify.app/)
 
 <div style="display: flex; flex-direction: row;">
   <img src="https://github.com/hocineismail/challenge-cities-card/blob/main/examples/example_1.png?raw=true" alt="Example 1" width="400" />
@@ -45,8 +45,9 @@
 7. **Logger Middleware:**
    - Created a logger middleware to log request details to the console.
    - The logger middleware captures and displays important information about incoming requests, helping in debugging and monitoring.
-example:
-![alt text](https://github.com/hocineismail/challenge-cities-card/blob/main/examples/logger.png?raw=true)
+     example:
+     ![alt text](https://github.com/hocineismail/challenge-cities-card/blob/main/examples/logger.png?raw=true)
+
 # ✔️ Pre-requisites
 
 - Install [Node.js](https://nodejs.org/en/)
@@ -100,7 +101,7 @@ To run program, run the following command.
 
 ## 🌐 Links
 
-- [Deployed] [DEMO](https://64b98e41c8d23d000770dd96--famous-palmier-e79f2f.netlify.app/)
+- [Deployed] [DEMO](https://deploy-dev--famous-palmier-e79f2f.netlify.app/)
 
 ## Author
 
