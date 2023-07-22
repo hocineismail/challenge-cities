@@ -1,6 +1,8 @@
 import styled, { keyframes } from "styled-components";
+
+// Define the TypePlaceholder interface for the Style
 interface TypePlaceholder {
-  type?: string | undefined;
+  type: "image" | "text"; // This type should be image or text
 }
 // Animation keyframes for the placeholder animation
 const placeholderAnimation = keyframes`
@@ -76,16 +78,16 @@ export default function CardsSectionPlaceholder() {
   return (
     <StyledCard>
       <StyledCardHeader>
-        <Placeholder type="image" data-test-id="placeholder" />
+        <Placeholder type="image" data-testid="placeholder-image" />
         <StyledDiv>
-          <Placeholder type="text" data-test-id="placeholder" />
-          <Placeholder type="text" data-test-id="placeholder" />
+          <Placeholder type="text" data-testid="placeholder-text1" />
+          <Placeholder type="text" data-testid="placeholder-text2" />
         </StyledDiv>
       </StyledCardHeader>
-      <Placeholder type="text" data-test-id="placeholder" />
-      <Placeholder type="text" data-test-id="placeholder" />
-      <Placeholder type="text" data-test-id="placeholder" />
-      <Placeholder type="text" data-test-id="placeholder" />
+      <Placeholder type="text" data-testid="placeholder-text3" />
+      <Placeholder type="text" data-testid="placeholder-text4" />
+      <Placeholder type="text" data-testid="placeholder-text5" />
+      <Placeholder type="text" data-testid="placeholder-text6" />
       <StyledHr />
     </StyledCard>
   );

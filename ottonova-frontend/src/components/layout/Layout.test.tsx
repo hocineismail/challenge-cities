@@ -1,18 +1,17 @@
 import Layout from "./Layout";
-import Enzyme, { shallow } from "enzyme";
-import "jest-styled-components";
-import Adapter from "enzyme-adapter-react-16";
-
-Enzyme.configure({ adapter: new Adapter() });
+import { render, screen } from "@testing-library/react";
 
 describe("Render: Layout component", () => {
-  it("Should render Layout", () => {
-    const child = <div data-test-id="child" />;
-    const wrapper = shallow(<Layout>{child}</Layout>);
-    expect(
-      wrapper.find({
-        "data-test-id": "layout",
-      }).length
-    ).toBe(1);
+  it("Should render correctly with children", () => {
+    const mockChild = (
+      <div data-testid="child">Hello, this is a child component</div>
+    );
+
+    render(<Layout>{mockChild}</Layout>);
+
+    const layoutElement = screen.getByTestId("layout");
+    expect(layoutElement).toBeInTheDocument();
+
+    expect(layoutElement).toHaveTextContent("Hello, this is a child component");
   });
 });

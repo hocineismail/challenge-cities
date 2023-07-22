@@ -1,8 +1,10 @@
 import React from "react";
 import { appState } from "./reducer";
 import { Action, State } from "../typed/app";
-// // eslint-disable-next-line @typescript-eslint/no-explicit-any
-// export const AppContext = React.createContext<any>(null);// eslint-disable-next-line @typescript-eslint/no-explicit-any
+
+// AppContext is a React context that provides access to the  global state and dispatch function.
+// The context is created using React.createContext and initialized with the default values.
+// This context is typically (like redux and NgRx) used in combination with a reducer to manage the global state and actions.
 
 export const AppContext = React.createContext<{
     state: State;

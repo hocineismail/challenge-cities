@@ -33,10 +33,13 @@ function App() {
     <AppContext.Provider value={{ state, dispatch }}>
       <ThemeProvider
         theme={state.theme === DARK_THEME ? darkTheme : ligthTheme}
+        data-testid={state.theme}
       >
         <Layout>
           <Navbar />
-          <CitiesSection />
+          <div data-testid="cities-section">
+            <CitiesSection />
+          </div>
           <CityDetailsModal />
         </Layout>
         <GlobalStyles />

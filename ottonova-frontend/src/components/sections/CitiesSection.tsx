@@ -7,13 +7,13 @@ import CardsSectionPlaceholder from "../loader/CardsPlaceholder";
 
 import { City } from "../../typed/cities";
 
-//make sur to add your api on .env
+//Make sur to add your api on .env
 //NOTICE: if you don't add it, it will use http://localhost:8080/
 //Make sure the backend is running on the same port.
 
-const API = process.env.REACT_APP_API || "http://localhost:8080/api/v1/";
+// const API = process.env.REACT_APP_API || "http://localhost:8080/api/v1/";
 
-// Styled component representing the grid layout for the cards
+// Create style for section that contains cards\
 const StyledCardsSection = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -42,11 +42,16 @@ export default function CitiesSection() {
     isLoading,
     errors,
   } = useFetchDataFromUrl<{ cities: City[] }>({
-    url: `${API}/cities`,
+    url: `/cities.json`,
   });
 
   // Render placeholders when loading
-  if (isLoading) return <StyledCardsSection>{placeholders}</StyledCardsSection>;
+  if (isLoading)
+    return (
+      <StyledCardsSection data-testid="loading-section">
+        {placeholders}
+      </StyledCardsSection>
+    );
 
   // Render error message if there are errors
   // type="danger" to display red alert
