@@ -45,7 +45,8 @@
 7. **Logger Middleware:**
    - Created a logger middleware to log request details to the console.
    - The logger middleware captures and displays important information about incoming requests, helping in debugging and monitoring.
-
+example:
+![alt text](https://github.com/hocineismail/challenge-cities-card/blob/main/examples/logger.png?raw=true)
 # ✔️ Pre-requisites
 
 - Install [Node.js](https://nodejs.org/en/)
