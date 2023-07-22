@@ -1,40 +1,49 @@
 import React from "react";
-import { shallow, ShallowWrapper } from "enzyme";
+import { render, screen, fireEvent } from "@testing-library/react";
+import Button from "./Button"; // Replace './Button' with the actual path to your Button component
+import { ThemeProvider } from "styled-components";
+import { ligthTheme } from "../../styles/themes/lightTheme";
 
-import Enzyme from "enzyme";
+// Mock function for handle click
+const mockHandleClick = jest.fn();
 
-import Adapter from "enzyme-adapter-react-16";
+describe("Button Component:", () => {
+  test("Renders the Button Component correctly with text and type", () => {
+    const buttonText = "Click Me";
+    const buttonType = "submit";
 
-Enzyme.configure({ adapter: new Adapter() });
-import Button from "./Button";
+    render(
+      <ThemeProvider theme={ligthTheme}>
+        <Button
+          text={buttonText}
+          type={buttonType}
+          handleClick={mockHandleClick}
+        />
+      </ThemeProvider>
+    );
 
-describe("Render Button Component", () => {
-  const handleClickMock = jest.fn();
-  let wrapper: ShallowWrapper = shallow(
-    <Button text="Click me" handleClick={handleClickMock} />
-  );
+    const buttonElement = screen.getByText(buttonText);
+    expect(buttonElement).toBeInTheDocument();
+    expect(buttonElement.tagName).toBe("BUTTON");
+    expect(buttonElement.getAttribute("type")).toBe(buttonType);
 
-  afterEach(() => {
-    jest.clearAllMocks();
+    // Click the button and check if the mockHandleClick function is called
+    fireEvent.click(buttonElement);
+    expect(mockHandleClick).toHaveBeenCalled();
   });
 
-  it("Renders the button with text", () => {
-    expect(wrapper.text()).toContain("Click me");
-  });
+  test("Renders the Button component correctly without handleClick.", () => {
+    const buttonText = "Submit";
 
-  it("Calls the handleClick function when clicked", () => {
-    wrapper.simulate("click");
-    expect(handleClickMock).toHaveBeenCalled();
-  });
+    render(
+      <ThemeProvider theme={ligthTheme}>
+        <Button text={buttonText} type="submit" />
+      </ThemeProvider>
+    );
 
-  it("Should render the button with the specified type (style)", () => {
-    const type = "primary";
-    wrapper.setProps({ type });
-    expect(wrapper.prop("type")).toBe(type);
-  });
-
-  it("Should render the button without type when not specified", () => {
-    wrapper.setProps({ type: undefined });
-    expect(wrapper.prop("type")).toBeUndefined();
+    const buttonElement = screen.getByText(buttonText);
+    expect(buttonElement).toBeInTheDocument();
+    expect(buttonElement.tagName).toBe("BUTTON");
+    expect(buttonElement.getAttribute("type")).toBe("submit");
   });
 });

@@ -1,24 +1,24 @@
-import Enzyme from "enzyme";
-import "jest-styled-components";
-import Adapter from "enzyme-adapter-react-16";
-import { shallow } from "enzyme";
 import Alert from "./Alert";
+import "@testing-library/jest-dom/extend-expect";
+import { render, screen } from "@testing-library/react";
 
-Enzyme.configure({ adapter: new Adapter() });
-
-describe("Render: Alert component", () => {
-  const props = {
-    text: "This is an alert",
-    type: "default",
-  };
-
-  it("Should render without crashing", () => {
-    const wrapper = shallow(<Alert {...props} />);
-    expect(wrapper.exists()).toBe(true);
+describe("Alert component", () => {
+  //mock data for props
+  const testText = "Test Alert";
+  const testType = "danger";
+  test("renders with correct text and type", () => {
+    render(<Alert text={testText} type={testType} />);
+    //check the text if exist
+    expect(screen.getByText(testText)).toBeInTheDocument();
+    const alertElement = screen.getByTestId("alert");
+    expect(screen.getByTestId("alert")).toBeInTheDocument();
+    expect(alertElement.getAttribute("type")).toBe(testType);
   });
 
-  it("Should render the text prop", () => {
-    const wrapper = shallow(<Alert {...props} />);
-    expect(wrapper.text()).toEqual(props.text);
+  test("renders with default type", () => {
+    render(<Alert text={testText} />);
+    const alertElement = screen.getByTestId("alert");
+    expect(screen.getByTestId("alert")).toBeInTheDocument();
+    expect(alertElement.getAttribute("type")).toBe("default");
   });
 });

@@ -1,6 +1,5 @@
 
-import React from 'react'
-
+import React, { useCallback, useEffect } from 'react';
 
 /**
  * Custom hook to fetch data from a specified URL.
@@ -11,7 +10,7 @@ import React from 'react'
  */
 
 interface Props {
-    url: string
+    url: string;
 }
 interface ApiResponse<T> {
     data: T | undefined;
@@ -20,31 +19,36 @@ interface ApiResponse<T> {
 }
 export default function useFetchDataFromUrl<T>({ url }: Props): ApiResponse<T> {
 
+    // useCalback to memoize the fetchData function
+    const fetchData = useCallback(async () => {
+        try {
+            const response = await fetch(url);
+            if (response.ok) {
+                const responseData = await response.json();
+                setIsLoading(false);
+                setData(responseData);
+            } else {
+                throw new Error('Request failed');
+            }
+        } catch (error) {
+            setIsLoading(false);
+            setErrors('Oooups!!! Something went Wrong');
+        }
+    }, [url]);
+
     const [data, setData] = React.useState<T | undefined>(undefined);
 
     const [isLoading, setIsLoading] = React.useState<boolean>(true);
     const [errors, setErrors] = React.useState<string | null>(null);
-    React.useEffect(() => {
+
+    // fetchData function will be called if url is updated and exist 
+    useEffect(() => {
         if (url) {
-            (async () => {
-                try {
-                    const response = await fetch(url);
-                    if (response.ok) {
-                        const responseData = await response.json();
-                        setIsLoading(false);
-                        setData(responseData);
-                    } else {
-                        throw new Error('Request failed');
-                    }
-                } catch (error) {
-                    setIsLoading(false);
-                    setErrors('Oooups!!! Something went Wrong');
-                }
-            })();
+            fetchData();
         }
-    }, [url]);
+    }, [url, fetchData]);
 
     return {
         data, isLoading, errors
-    }
+    };
 }

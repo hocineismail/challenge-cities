@@ -1,9 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-type Props = {
-  children: React.ReactNode;
-};
+// Create the style of layout using styled-compoents
 const StyledContainer = styled.div`
   /* Styles for all screen sizes */
   max-width: 1100px !important;
@@ -16,6 +14,12 @@ const StyledContainer = styled.div`
     padding-left: 10px;
   }
 `;
+
+// Define the props interface for the Layout
+type Props = {
+  children: React.ReactNode; // children can include any valid React nodes such as elements, text, or components.
+};
+
 export default function Layout({ children }: Props) {
-  return <StyledContainer data-test-id="layout">{children}</StyledContainer>;
+  return <StyledContainer data-testid="layout">{children}</StyledContainer>;
 }
