@@ -1,46 +1,45 @@
 
 
-import { OPEN_MODAL, CLOSE_MODAL, SWITCH_THEME, } from "../constants/store";
-import { City } from "../typed/cities";
+import { SET_CITY, TOGGLE_MODAL, SET_THEME, } from "../constants/store";
+import { Action, State } from "../typed/app";
+import { setThemeStorage } from "../utils/helper";
 
-
-export interface AppInit {
-    city: City | null;
-    isModalVisible: boolean;
-    theme: string | null
-}
-
-export interface AppAction {
-    type: string;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    payload?: any
-}
-export const appState: AppInit = {
-    city: null,
-    isModalVisible: false,
-    theme: null
+export const appState: State = {
+    city: null, // details of the city, like, name, name-native...
+    isModalVisible: false, // isModalVisible is the status of the Modal is visible or not, the default value is false
+    theme: null, // currently selected theme for the application, 
 };
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export function appReducer(state: AppInit, action: AppAction): any {
+
+// appReducer is the application's reducer function, responsible for updating the state based on dispatched actions.
+// It takes two parameters: 'state', which represents the current state, and 'action', the dispatched action object.
+
+// - 'SET_CITY': Updates the 'city' with city details and sets 'isModalVisible' to true.
+// - 'TOGGLE_MODAL': Resets 'city' to null and sets 'isModalVisible' to false.
+// - 'SET_THEME': Sets the selected 'theme' and saves it to the local storage using 'setThemeStorage' helper function.
+
+// The default case throws an error to handle any unknown action types.
+export const appReducer = (state: State, action: Action): State => {
     switch (action.type) {
-        case OPEN_MODAL:
+        case SET_CITY:
             return {
                 ...state,
-                city: action.payload,
+                city: action.payload.city,
                 isModalVisible: true
             }
-        case CLOSE_MODAL:
+        case TOGGLE_MODAL:
             return {
                 ...state,
                 city: null,
                 isModalVisible: false
             }
-        case SWITCH_THEME:
+        case SET_THEME:
+            setThemeStorage(action.payload.theme)
             return {
                 ...state,
-                theme: action.payload === "DARK" ? action.payload : state.theme === "DARK" ? "LIGHT" : "DARK"
+                theme: action.payload.theme
             }
         default:
             throw new Error();
     }
 }
+

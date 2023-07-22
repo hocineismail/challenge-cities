@@ -2,14 +2,18 @@ import styled from "styled-components";
 import useFetchDataFromUrl from "../../hooks/useFetchDataFromUrl";
 import Alert from "../alert/Alert";
 import Card from "../card/Card";
-import { City } from "../../typed/cities";
+
 import CardsSectionPlaceholder from "../loader/CardsPlaceholder";
 
-//make sur to add your api on .env
+import { City } from "../../typed/cities";
+
+//Make sur to add your api on .env
 //NOTICE: if you don't add it, it will use http://localhost:8080/
 //Make sure the backend is running on the same port.
 
-// Styled component representing the grid layout for the cards
+// const API = process.env.REACT_APP_API || "http://localhost:8080/api/v1/";
+
+// Create style for section that contains cards\
 const StyledCardsSection = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -33,7 +37,6 @@ const placeholders = Array.from({ length: 8 }, (_, index) => (
 // Main component for rendering the cities section
 export default function CitiesSection() {
   // Fetch data from a specified URL using a custom hook
-
   const {
     data: { cities } = { cities: [] },
     isLoading,
@@ -43,12 +46,15 @@ export default function CitiesSection() {
   });
 
   // Render placeholders when loading
-  if (isLoading) return <StyledCardsSection>{placeholders}</StyledCardsSection>;
+  if (isLoading)
+    return (
+      <StyledCardsSection data-testid="loading-section">
+        {placeholders}
+      </StyledCardsSection>
+    );
 
   // Render error message if there are errors
-
   // type="danger" to display red alert
-
   if (errors) return <Alert text={errors} type="danger" />;
 
   // Render the grid of city cards if data is available

@@ -1,3 +1,3 @@
-export const OPEN_MODAL = "OPEN_MODAL"
-export const CLOSE_MODAL = "CLOSE_MODAL"
-export const SWITCH_THEME = "SWITCH_THEME"
+export const SET_CITY = "SET_CITY"
+export const TOGGLE_MODAL = "TOGGLE_MODAL"
+export const SET_THEME = "SET_THEME"

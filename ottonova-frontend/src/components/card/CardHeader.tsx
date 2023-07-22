@@ -1,11 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-interface Props {
-  icon: React.ReactNode;
-  title: string;
-  subTitle: string;
-}
 
+// Create the style of CardHeader using styled-components
 const StyledCardHeader = styled.div`
   display: grid;
   grid-template-columns: 50px auto;
@@ -28,17 +24,25 @@ const StyledSubTitle = styled.h3`
 const StyledHr = styled.hr`
   border: none;
   height: 1px;
-  background-color: #d7d7d7;
+  background-color: ${({ theme }) => theme.colors.gray};
   margin: 0px 10px;
 `;
+
+// Define the props interface for the Card Content component
+interface Props {
+  icon: React.ReactNode;
+  title: string;
+  subTitle: string;
+}
+
 export default function CardHeader({ icon, title, subTitle }: Props) {
   return (
     <>
-      <StyledCardHeader data-test-id="header-card">
-        <StyledIcon data-test-id="header-card-icon">{icon}</StyledIcon>
+      <StyledCardHeader data-testid="header-card">
+        <StyledIcon data-testid="header-card-icon">{icon}</StyledIcon>
         <StyledDiv>
-          <StyledTitle data-test-id="header-card-title">{title}</StyledTitle>
-          <StyledSubTitle data-test-id="header-card-subtitle">
+          <StyledTitle data-testid="header-card-title">{title}</StyledTitle>
+          <StyledSubTitle data-testid="header-card-subtitle">
             {subTitle}
           </StyledSubTitle>
         </StyledDiv>

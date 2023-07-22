@@ -6,12 +6,16 @@ import CardHeader from "./CardHeader";
 import { LiaCitySolid } from "react-icons/lia";
 import React from "react";
 import { AppContext } from "../../store/context";
-import { OPEN_MODAL } from "../../constants/store";
+import { SET_CITY } from "../../constants/store";
+import { addCommasToNumberString } from "../../utils/helper";
 
+// Created the style of the card using styled components
 const StyledCard = styled.div`
-  border: 1px solid ${({ theme }) => theme.colors.secondaryText};
+  border: 1px solid ${({ theme }) => theme.colors.gray};
   border-radius: 10px;
 `;
+
+// Define the props interface for the Card component
 interface Props {
   founded: string;
   population: string;
@@ -23,6 +27,7 @@ interface Props {
   latitude: string;
   longitude: string;
 }
+
 export default function Card({
   name,
   name_native,
@@ -34,24 +39,30 @@ export default function Card({
   founded,
   landmarks,
 }: Props) {
+  // The dispatch function enables us to update the global states of our application.
+  // React.useContext(AppContext) allows us to access to the state and dispatch from the main parent component.
   const { dispatch } = React.useContext(AppContext);
+  // Dispatches an action to set the city information in the global state.
   const handleClick = () =>
+    // dispatch
     dispatch({
-      type: OPEN_MODAL,
+      type: SET_CITY,
       payload: {
-        name,
-        name_native,
-        country,
-        continent,
-        latitude,
-        longitude,
-        population,
-        founded,
-        landmarks,
+        city: {
+          name,
+          name_native,
+          country,
+          continent,
+          latitude,
+          longitude,
+          population,
+          founded,
+          landmarks,
+        },
       },
     });
   return (
-    <StyledCard data-test-id="card">
+    <StyledCard data-testid="card">
       <CardHeader
         title={name}
         subTitle={name_native}
@@ -59,12 +70,12 @@ export default function Card({
       />
       <CardContent
         founded={founded}
-        population={population}
+        population={addCommasToNumberString(population)}
         city={`${country} | ${continent}`}
         marks={landmarks}
       />
-      <CardActions>
-        <Button text="Show" handleClick={handleClick} />
+      <CardActions data-testid="card-action">
+        <Button text="Details" handleClick={handleClick} />
       </CardActions>
     </StyledCard>
   );
