@@ -1,5 +1,8 @@
 # Solution: [#Demo](https://64b98e41c8d23d000770dd96--famous-palmier-e79f2f.netlify.app/)
-
+<div style="display: flex; flex-direction: row;">
+  <img src="https://github.com/hocineismail/challenge-cities-card/blob/main/examples/example_1.png?raw=true" alt="Example 1" width="400" />
+  <img src="https://github.com/hocineismail/challenge-cities-card/blob/main/examples/example-2.png?raw=true" alt="Example 2" width="400" />
+</div>
 ## Features
 
 1. **Technology Stack:**
