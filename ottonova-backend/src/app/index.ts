@@ -13,7 +13,8 @@ import { Logger } from "@middleware/Logger";
 
 
 const app = express();
-const POST = process.env.PORT || 3001;
+
+const POST = process.env.PORT || 8080;
 
 
 

@@ -19,10 +19,10 @@ const StyledList = styled.ul`
   font-size: clamp(14px, 2vw, 0.8rem);
   margin-left: 10px;
   margin-top: 0px;
-  padding-left: 15px;
+  padding-left: 10px;
 `;
 const StyledListitem = styled.li`
-  font-size: clamp(0.8rem, 3vw, 1rem);
+  font-size: clamp(0.8rem, 3vw, 0.9rem);
 `;
 
 // Define the props interface for the Card Content component
