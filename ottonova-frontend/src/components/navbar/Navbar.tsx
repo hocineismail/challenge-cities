@@ -46,10 +46,10 @@ export default function Navbar() {
           })
         }
       >
-        {theme === "DARK" ? (
-          <BsFillSunFill size={25} data-testid="dark_icon" />
+        {theme === DARK_THEME ? (
+          <BsFillSunFill size={25} data-testid="light_icon" />
         ) : (
-          <FaRegMoon size={25} data-testid="light_icon" />
+          <FaRegMoon size={25} data-testid="dark_icon" />
         )}
       </StylledSwitcherTheme>
     </StyledNavbar>

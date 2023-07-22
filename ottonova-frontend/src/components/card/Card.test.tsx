@@ -4,7 +4,7 @@ import "@testing-library/jest-dom/extend-expect";
 import { render, screen } from "@testing-library/react";
 import Card from "./Card";
 import { ThemeProvider } from "styled-components";
-import { ligthTheme } from "../../styles/themes/lightTheme";
+import { lightTheme } from "../../styles/themes/lightTheme";
 
 const props = {
   name: "Test Title",
@@ -21,7 +21,7 @@ const props = {
 describe("Card component", () => {
   it("renders with correct text and type", () => {
     render(
-      <ThemeProvider theme={ligthTheme}>
+      <ThemeProvider theme={lightTheme}>
         <Card {...props} />
       </ThemeProvider>
     );
@@ -31,7 +31,7 @@ describe("Card component", () => {
 
   it("Component should display the correct information provded by props:", () => {
     render(
-      <ThemeProvider theme={ligthTheme}>
+      <ThemeProvider theme={lightTheme}>
         <Card {...props} />
       </ThemeProvider>
     );

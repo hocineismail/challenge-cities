@@ -6,7 +6,7 @@ import { AppContext } from "../../store/context";
 import { TOGGLE_MODAL } from "../../constants/store";
 
 import { State } from "../../typed/app";
-import { ligthTheme } from "../../styles/themes/lightTheme";
+import { lightTheme } from "../../styles/themes/lightTheme";
 
 describe("CityDetailsModal", () => {
   test("renders CityDetailsModal component", () => {
@@ -29,7 +29,7 @@ describe("CityDetailsModal", () => {
     const dispatch = jest.fn();
     render(
       <AppContext.Provider value={{ state, dispatch }}>
-        <ThemeProvider theme={ligthTheme}>
+        <ThemeProvider theme={lightTheme}>
           <CityDetailsModal />
         </ThemeProvider>
       </AppContext.Provider>
@@ -63,7 +63,7 @@ describe("CityDetailsModal", () => {
     const dispatch = jest.fn();
     const { getByTestId } = render(
       <AppContext.Provider value={{ state, dispatch }}>
-        <ThemeProvider theme={ligthTheme}>
+        <ThemeProvider theme={lightTheme}>
           <CityDetailsModal />
         </ThemeProvider>
       </AppContext.Provider>

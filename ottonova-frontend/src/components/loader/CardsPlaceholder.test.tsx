@@ -1,12 +1,12 @@
 import { render, screen } from "@testing-library/react";
 import CardsPlaceholder from "./CardsPlaceholder";
 import { ThemeProvider } from "styled-components";
-import { ligthTheme } from "../../styles/themes/lightTheme";
+import { lightTheme } from "../../styles/themes/lightTheme";
 
 describe("CardsPlaceholder", () => {
   it("Should render correctly with placeholders", () => {
     render(
-      <ThemeProvider theme={ligthTheme}>
+      <ThemeProvider theme={lightTheme}>
         <CardsPlaceholder />
       </ThemeProvider>
     );

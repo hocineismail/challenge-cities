@@ -1,6 +1,6 @@
 import React from "react";
 import { ThemeProvider } from "styled-components";
-import { ligthTheme } from "./styles/themes/lightTheme";
+import { lightTheme } from "./styles/themes/lightTheme";
 
 import GlobalStyles from "./styles/global";
 import Layout from "./components/layout/Layout";
@@ -32,7 +32,7 @@ function App() {
   return (
     <AppContext.Provider value={{ state, dispatch }}>
       <ThemeProvider
-        theme={state.theme === DARK_THEME ? darkTheme : ligthTheme}
+        theme={state.theme === DARK_THEME ? darkTheme : lightTheme}
         data-testid={state.theme}
       >
         <Layout>

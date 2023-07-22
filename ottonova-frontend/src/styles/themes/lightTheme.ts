@@ -2,7 +2,7 @@ import { Theme } from "../../typed/theme";
 
 
 
-export const ligthTheme: Theme = {
+export const lightTheme: Theme = {
     colors: {
         text: '#00104B',
         background: '#fff',
