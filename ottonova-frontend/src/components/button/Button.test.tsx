@@ -2,7 +2,7 @@ import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import Button from "./Button"; // Replace './Button' with the actual path to your Button component
 import { ThemeProvider } from "styled-components";
-import { ligthTheme } from "../../styles/themes/lightTheme";
+import { lightTheme } from "../../styles/themes/lightTheme";
 
 // Mock function for handle click
 const mockHandleClick = jest.fn();
@@ -13,7 +13,7 @@ describe("Button Component:", () => {
     const buttonType = "submit";
 
     render(
-      <ThemeProvider theme={ligthTheme}>
+      <ThemeProvider theme={lightTheme}>
         <Button
           text={buttonText}
           type={buttonType}
@@ -36,7 +36,7 @@ describe("Button Component:", () => {
     const buttonText = "Submit";
 
     render(
-      <ThemeProvider theme={ligthTheme}>
+      <ThemeProvider theme={lightTheme}>
         <Button text={buttonText} type="submit" />
       </ThemeProvider>
     );

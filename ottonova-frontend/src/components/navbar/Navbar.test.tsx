@@ -2,7 +2,7 @@ import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import Navbar from "./Navbar";
 import { ThemeProvider } from "styled-components";
-import { ligthTheme } from "../../styles/themes/lightTheme";
+import { lightTheme } from "../../styles/themes/lightTheme";
 import { AppContext } from "../../store/context";
 import { State } from "../../typed/app";
 import { SET_THEME } from "../../constants/store";
@@ -18,7 +18,7 @@ describe("Navbar renders correctly with correct theme icon", () => {
     const state = { ...mockState };
     render(
       <AppContext.Provider value={{ state, dispatch }}>
-        <ThemeProvider theme={ligthTheme}>
+        <ThemeProvider theme={lightTheme}>
           <Navbar />
         </ThemeProvider>
       </AppContext.Provider>
@@ -31,7 +31,7 @@ describe("Navbar renders correctly with correct theme icon", () => {
     const state = { ...mockState, theme: "DARK" };
     render(
       <AppContext.Provider value={{ state, dispatch }}>
-        <ThemeProvider theme={ligthTheme}>
+        <ThemeProvider theme={lightTheme}>
           <Navbar />
         </ThemeProvider>
       </AppContext.Provider>
@@ -44,7 +44,7 @@ describe("Navbar renders correctly with correct theme icon", () => {
     const state = { ...mockState, theme: "LIGHT" };
     render(
       <AppContext.Provider value={{ state, dispatch }}>
-        <ThemeProvider theme={ligthTheme}>
+        <ThemeProvider theme={lightTheme}>
           <Navbar />
         </ThemeProvider>
       </AppContext.Provider>
@@ -62,7 +62,7 @@ describe("Navbar renders correctly with correct theme icon", () => {
     const state = { ...mockState, theme: "DARK" };
     render(
       <AppContext.Provider value={{ state, dispatch }}>
-        <ThemeProvider theme={ligthTheme}>
+        <ThemeProvider theme={lightTheme}>
           <Navbar />
         </ThemeProvider>
       </AppContext.Provider>

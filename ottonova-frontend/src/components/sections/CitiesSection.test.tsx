@@ -3,7 +3,7 @@ import { render, screen } from "@testing-library/react";
 import useFetchDataFromUrl from "../../hooks/useFetchDataFromUrl";
 import { City } from "../../typed/cities";
 import { ThemeProvider } from "styled-components";
-import { ligthTheme } from "../../styles/themes/lightTheme";
+import { lightTheme } from "../../styles/themes/lightTheme";
 import CitiesSection from "./CitiesSection";
 
 jest.mock("../../hooks/useFetchDataFromUrl");
@@ -52,7 +52,7 @@ describe("CitiesSection", () => {
 
   it("renders a grid of city cards", () => {
     render(
-      <ThemeProvider theme={ligthTheme}>
+      <ThemeProvider theme={lightTheme}>
         <CitiesSection />
       </ThemeProvider>
     );
@@ -68,7 +68,7 @@ describe("CitiesSection", () => {
     });
 
     render(
-      <ThemeProvider theme={ligthTheme}>
+      <ThemeProvider theme={lightTheme}>
         <CitiesSection />
       </ThemeProvider>
     );
@@ -84,7 +84,7 @@ describe("CitiesSection", () => {
     });
 
     render(
-      <ThemeProvider theme={ligthTheme}>
+      <ThemeProvider theme={lightTheme}>
         <CitiesSection />
       </ThemeProvider>
     );

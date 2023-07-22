@@ -15,30 +15,19 @@ const ModalContainer = styled(
     <div {...rest} />
   )
 )`
-  position: fixed; // Positioned as a fixed element within the viewport.
-  top: 0; // Positioned at the top of the viewport.
-  left: 0; // Positioned at the left of the viewport.
-  right: 0; // Positioned at the right of the viewport.
-  bottom: 0; // Positioned at the bottom of the viewport.
-  background-color: rgba(
-    0,
-    0,
-    0,
-    0.4
-  ); // Semi-transparent black background to create a modal overlay effect.
-  z-index: 9999; // A high z-index value to ensure the modal is displayed above other elements.
-  display: flex; // Displayed as a flex container.
-  justify-content: center; // Center the modal horizontally.
-  align-items: center; // Center the modal vertically.
-  visibility: ${(props) =>
-    props.isOpen
-      ? "visible"
-      : "hidden"}; // Show or hide the modal based on the 'isOpen' prop.
-  opacity: ${(props) =>
-    props.isOpen
-      ? 1
-      : 0}; // Make the modal fully opaque when open, fully transparent when closed.
-  transition: visibility 0.2s ease-in-out, opacity 0.2s ease-in-out; // Smooth transitions for visibility and opacity changes.
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  visibility: ${(props) => (props.isOpen ? "visible" : "hidden")};
+  opacity: ${(props) => (props.isOpen ? 1 : 0)};
+  transition: visibility 0.2s ease-in-out, opacity 0.2s ease-in-out;
 `;
 
 // Create a The animation of the modal using styled-components
@@ -68,11 +57,11 @@ const ModalContent = styled(
   margin: 10px;
   min-height: 100px;
   max-width: 550px;
+  position: relative;
   transform-origin: center center;
-
   animation-duration: 0.3s;
   animation-timing-function: ease-in-out;
-  animation-name: ${(props) => (props.isOpen ? modalOpenAnimation : "none")};
+  // animation-name: ${(props) => (props.isOpen ? modalOpenAnimation : "none")};
   animation-fill-mode: forwards;
 `;
 
@@ -90,6 +79,9 @@ const StyledClose = styled.button`
   cursor: pointer;
   right: 25px;
   top: 25px;
+  border-color: transparent;
+  background-color: transparent;
+  color: ${({ theme }) => theme.colors.text};
 `;
 
 // Props interface for the Modal component

@@ -3,12 +3,12 @@ import { render, fireEvent } from "@testing-library/react";
 import { ThemeProvider } from "styled-components";
 import Modal from "./Modal";
 
-import { ligthTheme } from "../../styles/themes/lightTheme";
+import { lightTheme } from "../../styles/themes/lightTheme";
 describe("Modal", () => {
   it("Should call onClose prop when close button is clicked", () => {
     const onClose = jest.fn();
     const { getByTestId } = render(
-      <ThemeProvider theme={ligthTheme}>
+      <ThemeProvider theme={lightTheme}>
         <Modal isOpen={true} onClose={onClose} title="Test Modal">
           <p>Modal Content</p>
         </Modal>
@@ -20,7 +20,7 @@ describe("Modal", () => {
   test("Should call  onClose prop when clicked outside of modal", () => {
     const onClose = jest.fn();
     const { getByTestId } = render(
-      <ThemeProvider theme={ligthTheme}>
+      <ThemeProvider theme={lightTheme}>
         <Modal isOpen={true} onClose={onClose} title="Test Modal">
           <p>Modal Content</p>
         </Modal>
@@ -34,7 +34,7 @@ describe("Modal", () => {
   test("Shouldn't call  onClose when click onside the modal ", () => {
     const onClose = jest.fn();
     const { getByTestId } = render(
-      <ThemeProvider theme={ligthTheme}>
+      <ThemeProvider theme={lightTheme}>
         <Modal isOpen={true} onClose={onClose} title="Test Modal">
           <p>Modal Content</p>
         </Modal>
@@ -49,7 +49,7 @@ describe("Modal", () => {
 // import { render, screen, fireEvent } from "@testing-library/react";
 // import Modal from "./Modal"; // Replace './Modal' with the actual path to your Modal component
 // import { ThemeProvider } from "styled-components";
-// import { ligthTheme } from "../../styles/themes/lightTheme";
+// import { lightTheme } from "../../styles/themes/lightTheme";
 
 // // Mock the react-icons/AiOutlineClose component
 // jest.mock("react-icons/ai", () => ({
@@ -75,7 +75,7 @@ describe("Modal", () => {
 //   //       title: <div>{titleText}</div>,
 //   //     };
 //   //     render(
-//   //       <ThemeProvider theme={ligthTheme}>
+//   //       <ThemeProvider theme={lightTheme}>
 //   //         <Modal {...props}>
 //   //           <div> This is the modal content</div>
 //   //         </Modal>
@@ -112,7 +112,7 @@ describe("Modal", () => {
 //   //     const titleText = "Test Modal";
 //   //     const children = <div> This is the modal content"</div>;
 //   //     render(
-//   //       <ThemeProvider theme={ligthTheme}>
+//   //       <ThemeProvider theme={lightTheme}>
 //   //         <Modal
 //   //           isOpen={false}
 //   //           onClose={jest.fn()}
