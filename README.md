@@ -1,10 +1,10 @@
-# Solution: [#Demo](https://deploy-dev--famous-palmier-e79f2f.netlify.app/)
+# Solution: [#Demo](https://challenge-cities.netlify.app/)
 
 <div style="display: flex; flex-direction: row;">
   <img src="https://github.com/hocineismail/challenge-cities-card/blob/main/examples/example_1.png?raw=true" alt="Example 1" width="400" />
   <img src="https://github.com/hocineismail/challenge-cities-card/blob/main/examples/example-2.png?raw=true" alt="Example 2" width="400" />
 </div>
-## Features
+# Features
 
 1. **Technology Stack:**
 
@@ -101,7 +101,7 @@ To run program, run the following command.
 
 ## 🌐 Links
 
-- [Deployed] [DEMO](https://deploy-dev--famous-palmier-e79f2f.netlify.app/)
+- [Deployed] [DEMO](https://challenge-cities.netlify.app/)
 
 ## Author
 
