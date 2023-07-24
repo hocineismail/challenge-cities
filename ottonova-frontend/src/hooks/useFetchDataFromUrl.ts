@@ -19,11 +19,11 @@ interface ApiResponse<T> {
     isLoading: boolean;
     errors: string | null;
 }
-// Create a single instance of the Cache class
-const cacheInstance = Cache.getInstance();
+
 export default function useFetchDataFromUrl<T>({ url, request }: Props): ApiResponse<T> {
 
-
+    // Create a single instance of the Cache class
+    const cacheInstance = Cache.getInstance();
     const [data, setData] = React.useState<T | undefined>(undefined);
 
     const [isLoading, setIsLoading] = React.useState<boolean>(true);
@@ -40,7 +40,6 @@ export default function useFetchDataFromUrl<T>({ url, request }: Props): ApiResp
                 //use stored data
                 // that will reduce requests numbers
                 const { data } = result
-
                 setTimeout(() => {
                     setIsLoading(false);
                     setData(data);
@@ -65,7 +64,6 @@ export default function useFetchDataFromUrl<T>({ url, request }: Props): ApiResp
             }
 
         } catch (error) {
-
             setTimeout(() => {
                 setIsLoading(false);
                 setErrors('Oooups!!! Something went Wrong');

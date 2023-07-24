@@ -1,34 +1,31 @@
-import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { ThemeProvider } from "styled-components";
 import CityDetailsModal from "./CityDetailsModal";
 import { AppContext } from "../../store/context";
 import { TOGGLE_MODAL } from "../../constants/store";
-
 import { State } from "../../typed/app";
 import { lightTheme } from "../../styles/themes/lightTheme";
 
+const mockState: State = {
+  city: {
+    name: "Test City",
+    name_native: "Test City Native",
+    founded: "1000",
+    population: "1000000",
+    country: "Test Country",
+    continent: "Test Continent",
+    landmarks: ["Landmark 1", "Landmark 2"],
+    latitude: "0",
+    longitude: "0",
+  },
+  isModalVisible: true,
+  theme: "LIGHT",
+};
 describe("CityDetailsModal", () => {
   test("renders CityDetailsModal component", () => {
-    const state: State = {
-      city: {
-        name: "Test City",
-        name_native: "Test City Native",
-        founded: "1000",
-        population: "1000000",
-        country: "Test Country",
-        continent: "Test Continent",
-        landmarks: ["Landmark 1", "Landmark 2"],
-        latitude: "0",
-        longitude: "0",
-      },
-      isModalVisible: true,
-      theme: "LIGHT",
-    };
-
     const dispatch = jest.fn();
     render(
-      <AppContext.Provider value={{ state, dispatch }}>
+      <AppContext.Provider value={{ state: mockState, dispatch }}>
         <ThemeProvider theme={lightTheme}>
           <CityDetailsModal />
         </ThemeProvider>
@@ -45,24 +42,9 @@ describe("CityDetailsModal", () => {
     expect(screen.getByText("Landmark 2")).toBeInTheDocument();
   });
   test("calls dispatch with TOGGLE_MODAL action when close button is clicked", () => {
-    const state = {
-      city: {
-        name: "Test City",
-        name_native: "Test City Native",
-        founded: "1000",
-        population: "1000000",
-        country: "Test Country",
-        continent: "Test Continent",
-        landmarks: ["Landmark 1", "Landmark 2"],
-        latitude: "0",
-        longitude: "0",
-      },
-      isModalVisible: true,
-      theme: "light",
-    };
     const dispatch = jest.fn();
     const { getByTestId } = render(
-      <AppContext.Provider value={{ state, dispatch }}>
+      <AppContext.Provider value={{ state: mockState, dispatch }}>
         <ThemeProvider theme={lightTheme}>
           <CityDetailsModal />
         </ThemeProvider>

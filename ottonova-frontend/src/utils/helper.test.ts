@@ -98,7 +98,11 @@ describe('theme Storage', () => {
 
 });
 
-
+/// ------------------------- cache ----------------------///
+const mockData = {
+    data: 'some_data'
+}
+const mockKey = 'name';
 describe("Cache", () => {
     let cache: Cache;
 
@@ -108,26 +112,23 @@ describe("Cache", () => {
     });
 
     test('Should store data in the cache, and return it', () => {
-        const key = 'name';
-        const mockData = 'some_data';
+
         const expirationSeconds = 36000; // 1 hour from now
-        cache.setStorage(key, mockData, expirationSeconds);
+        cache.setStorage(mockKey, mockData, expirationSeconds);
         const mockCache = {
             data: mockData, expiration:
                 expirationSeconds > 0 ? Date.now() + expirationSeconds * 1000 : 0
         }
-        const cachedData = cache.getStorage(key);
+        const cachedData = cache.getStorage(mockKey);
         expect(cachedData).toEqual(mockCache);
     });
 
 
     test('should return null when getting an expired item from the cache', () => {
-        const key = 'expired_key';
-        const value = 'expired_value';
-        const pastExpirationSeconds = -2000;
 
-        cache.setStorage(key, value, pastExpirationSeconds);
-        const retrievedValue = cache.getStorage(key);
+        const pastExpirationSeconds = -2000;
+        cache.setStorage(mockKey, mockData, pastExpirationSeconds);
+        const retrievedValue = cache.getStorage(mockKey);
         expect(retrievedValue).toBeNull()
     });
 

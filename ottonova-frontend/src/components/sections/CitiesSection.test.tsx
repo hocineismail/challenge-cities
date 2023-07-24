@@ -50,7 +50,7 @@ describe("CitiesSection", () => {
     });
   });
 
-  it("renders a grid of city cards", () => {
+  test("Should Renders a grid of city cards", () => {
     render(
       <ThemeProvider theme={lightTheme}>
         <CitiesSection />
@@ -60,7 +60,7 @@ describe("CitiesSection", () => {
     expect(screen.getAllByTestId("card").length).toBe(2);
   });
 
-  it("renders placeholders when loading", () => {
+  test("renders placeholders when loading", () => {
     (useFetchDataFromUrl as jest.Mock).mockReturnValue({
       data: undefined,
       isLoading: true,
@@ -76,7 +76,7 @@ describe("CitiesSection", () => {
     expect(screen.getByTestId("loading-section")).toBeInTheDocument();
   });
 
-  it("Should render the alert component if there are errors", () => {
+  test("Should render the alert component if there are errors", () => {
     (useFetchDataFromUrl as jest.Mock).mockReturnValue({
       data: undefined,
       isLoading: false,

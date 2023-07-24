@@ -1,7 +1,5 @@
-import React from "react";
 import { render, screen, waitFor } from "@testing-library/react";
 import useFetchDataFromUrl from "./useFetchDataFromUrl";
-import { act } from "react-dom/test-utils";
 
 // Mock the response function
 function mockResponse(ok: boolean, data: any) {
@@ -10,6 +8,7 @@ function mockResponse(ok: boolean, data: any) {
     json: () => Promise.resolve(data),
   });
 }
+// creaye mockComponent
 
 const TestComponent = ({ url }: { url: string }) => {
   const { data, isLoading, errors } = useFetchDataFromUrl({
@@ -27,13 +26,12 @@ const TestComponent = ({ url }: { url: string }) => {
 
   return <div data-testid="data-content">{JSON.stringify(data)}</div>;
 };
-
+const mockData = { test: "Hello World" };
 describe("useFetchDataFromUrl", () => {
   beforeEach(() => {
     window.localStorage.clear();
   });
   it("fetches data from the specified URL", () => {
-    const mockData = { test: "data" };
     global.fetch = jest.fn(() =>
       Promise.resolve(mockResponse(true, mockData))
     ) as jest.Mock;
@@ -49,7 +47,6 @@ describe("useFetchDataFromUrl", () => {
   });
 
   it("Get data from cache", () => {
-    const mockData = { test: "Hello World" };
     const expiration = Date.now() + 100000;
     const cacheKey = `cache_cities`;
     const cachedItem = { data: mockData, expiration };
