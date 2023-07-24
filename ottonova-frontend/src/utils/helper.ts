@@ -1,12 +1,13 @@
+import { DARK_THEME, LIGHT_THEME } from "../constants/theme";
 
 /**
  * Adds commas to a number to format.
  * If the input is not a valid number, the original string is returned unchanged.
  *
  * @param {string} numberString - The input number as a string. 10200200
- * @returns {string} The formatted number string with commas or the numberString if it's not a valid number. 
+ * @returns {string} The formatted number string with commas or the numberString if it's not a valid number.
  * EXAMPLE:  10,200,200
- *  
+ *
  */
 
 export function addCommasToNumberString(numberString: string): string {
@@ -14,104 +15,129 @@ export function addCommasToNumberString(numberString: string): string {
     if (isNaN(number)) {
         return numberString; // Return the numberString if it's not a valid number
     }
-    return number.toLocaleString();
+    return number.toLocaleString('en-US');
 }
+
+
 /**
  * setThemeStorage store the current theme
  * @param {string} theme - string example: DARK | LIGHT
- *  
+ *
  */
+
 export function setThemeStorage(theme: string): void {
-    window.localStorage.setItem("theme", theme)
+    window.localStorage.setItem("theme", theme);
 }
-// class Storage {
-//     #cache: string = ""
-//     public setStorage(key: string, value: string) {
-//         window.localStorage.setItem(key, value)
-//     }
-//     public getStorage(key: string,) {
-//         window.localStorage.getItem(key)
-//     }
-//     public clearStorage() {
-//         window.localStorage.clear()
-//     }
-// }
-// class Cache extends Storage {
-//     private getCacheKey(key: string): string {
-//         return `cache_${key}`;
-//     }
 
-//     public setStorage(key: string, value: string, expirationSeconds: number = 0) {
-//         const expiration = expirationSeconds > 0 ? Date.now() + expirationSeconds * 1000 : 0;
-//         const cacheKey = this.getCacheKey(key);
-//         const cachedItem = { data: value, expiration };
-//         window.localStorage.setItem(cacheKey, JSON.stringify(cachedItem));
-//     }
+//Storage class enables to manuplite storage
+export class Storage {
+    public setItem(key: string, value: string): void {
+        localStorage.setItem(key, value);
+    }
 
-//     public getStorage(key: string) {
-//         const cacheKey = this.getCacheKey(key);
-//         const cachedItemString = window.localStorage.getItem(cacheKey);
-//         if (cachedItemString) {
-//             const cachedItem = JSON.parse(cachedItemString);
-//             if (!cachedItem.expiration || cachedItem.expiration >= Date.now()) {
-//                 return cachedItem.data;
-//             } else {
-//                 // Remove expired data from the cache
-//                 window.localStorage.removeItem(cacheKey);
-//             }
-//         }
-//         return null;
-//     }
+    public getItem(key: string): string | null {
+        return localStorage.getItem(key);
+    }
 
-//     public clearStorage() {
-//         for (let i = 0; i < window.localStorage.length; i++) {
-//             const key = window.localStorage.key(i);
-//             if (key && key.startsWith("cache_")) {
-//                 window.localStorage.removeItem(key);
-//             }
-//         }
-//     }
+    public removeItem(key: string): void {
+        localStorage.removeItem(key);
+    }
 
-//     public isExpired(key: string) {
-//         const cacheKey = this.getCacheKey(key);
-//         const cachedItemString = window.localStorage.getItem(cacheKey);
-//         if (cachedItemString) {
-//             const cachedItem = JSON.parse(cachedItemString);
-//             return cachedItem.expiration > 0 && cachedItem.expiration < Date.now();
-//         }
-//         return true;
-//     }
+    public clear(): void {
+        localStorage.clear();
+    }
+}
+//Theme is a class enables to get the current theme or swotch to the next theme
+export class Theme extends Storage {
 
-//     public getData(key: string, expirationSeconds: number = 0) {
-//         if (!this.isExpired(key)) {
-//             return this.getStorage(key);
-//         } else {
-//             // Fetch data and store it in the cache
-//             const newData = "fetch data"; // Replace this with your data fetching logic
-//             this.setStorage(key, newData, expirationSeconds);
-//             return newData;
-//         }
-//     }
-// }
+    public getCurrentTheme(): string {
+        const currentTheme = localStorage.getItem('theme')
+        if (currentTheme) {
+            return currentTheme
+        } else {
+            //the first time visit the website we need to add the default light theme
+            this.setItem("theme", LIGHT_THEME)
+            return LIGHT_THEME
+        }
 
+    }
 
-// // Step 1: Create an instance of the Cache class
-// const cache = new Cache();
+    public toggleTheme(): void {
+        const theme = this.getCurrentTheme() === DARK_THEME ? LIGHT_THEME : DARK_THEME
+        this.setItem("theme", theme);
+    }
+}
+//Cache is a class enables to store fetched data to reduce requests cost
+export class Cache extends Storage {
+    private static instance: Cache | null = null;
 
-// // Step 2: Store data in the cache using the setStorage method
-// cache.setStorage("example_key", "Hello, this is cached data!", 60); // The data will expire in 60 seconds
+    private constructor() {
+        super();
+    }
 
-// // Step 3: Retrieve data from the cache using the getData method
-// const cachedData = cache.getData("example_key");
-// if (cachedData) {
-//     console.log("Data from cache:", cachedData);
-// } else {
-//     console.log("Data not available in cache, fetching data...");
-//     // Replace the following line with your data fetching logic
-//     const fetchedData = "Data fetched from the server!";
-//     cache.setStorage("example_key", fetchedData, 60); // Store the fetched data in the cache with a 60-second expiration
-//     console.log("Fetched data:", fetchedData);
-// }
+    public static getInstance(): Cache {
+        if (!Cache.instance) {
+            Cache.instance = new Cache();
+        }
+        return Cache.instance;
+    }
 
-// Step 4: Clear the entire cache (if needed)
-// cache.clearStorage();
+    private getCacheKey(key: string): string {
+        return `cache_${key}`;
+    }
+
+    public setStorage(key: string, value: unknown, expirationSeconds = 0) {
+        const expiration =
+            Date.now() + expirationSeconds * 1000
+        const cacheKey = this.getCacheKey(key);
+        const cachedItem = { data: value, expiration };
+
+        this.setItem(cacheKey, JSON.stringify(cachedItem));
+    }
+
+    public getStorage(key: string) {
+        const cacheKey = this.getCacheKey(key);
+        const cachedItemString = window.localStorage.getItem(cacheKey);
+        if (cachedItemString) {
+            const cachedItem = JSON.parse(cachedItemString);
+            if (!cachedItem.expiration || cachedItem.expiration >= Date.now()) {
+                return cachedItem.data;
+            } else {
+                // Remove expired data from the cache
+                return null
+                window.localStorage.removeItem(cacheKey);
+
+            }
+        }
+        return null;
+    }
+
+    public clearStorage() {
+        for (let i = 0; i < window.localStorage.length; i++) {
+            const key = window.localStorage.key(i);
+            if (key && key.startsWith("cache_")) {
+                window.localStorage.removeItem(key);
+            }
+        }
+    }
+
+    public isExpired(key: string) {
+        const cacheKey = this.getCacheKey(key);
+        const cachedItemString = this.getStorage(cacheKey);
+        if (cachedItemString) {
+            const cachedItem = JSON.parse(cachedItemString);
+            return cachedItem.expiration > 0 && cachedItem.expiration < Date.now();
+        }
+        return true;
+    }
+
+    public getData(key: string) {
+        if (!this.isExpired(key)) {
+            return this.getStorage(key);
+        } else {
+            // Fetch data and store it in the cache
+            return null;
+        }
+    }
+}
+

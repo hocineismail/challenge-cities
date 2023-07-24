@@ -44,6 +44,7 @@ export default function CitiesSection() {
     errors,
   } = useFetchDataFromUrl<{ cities: City[] }>({
     url: `${API}/cities`,
+    request: "cities",
   });
 
   // Render placeholders when loading

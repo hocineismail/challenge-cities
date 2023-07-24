@@ -11,7 +11,10 @@ function mockResponse(ok: boolean, data: any) {
 }
 
 const TestComponent = ({ url }: { url: string }) => {
-  const { data, isLoading, errors } = useFetchDataFromUrl({ url });
+  const { data, isLoading, errors } = useFetchDataFromUrl({
+    url,
+    request: "cities",
+  });
 
   if (isLoading) {
     return <div>Loading</div>;

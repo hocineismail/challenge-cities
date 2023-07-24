@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --exec ts-node -r tsconfig-paths/register src/app/index.ts",
-    "test": "jest --watch"
+    "start:nodemon": "nodemon --exec ts-node -r tsconfig-paths/register src/app/index.ts",
+    "test": "jest --watch",
+    "start": "ts-node -r tsconfig-paths/register src/app/index.ts"
   },
   "keywords": [],
   "author": "",
