@@ -91,7 +91,7 @@ const MapWithIframe = ({ latitude, longitude }: MapProps) => {
 
   return (
     <>
-      {isLoading && <div>Loading...</div>}
+      {isLoading && <div></div>}
       <iframe
         src={mapUrl}
         style={{
