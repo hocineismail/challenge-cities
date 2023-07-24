@@ -13,14 +13,14 @@ import { darkTheme } from "./styles/themes/darkTheme";
 import { SET_THEME } from "./constants/store";
 import CityDetailsModal from "./components/modal/CityDetailsModal";
 import { DARK_THEME, LIGHT_THEME } from "./constants/theme";
-
+import { Theme } from "./utils/helper";
+const theme = new Theme();
 function App() {
   const [state, dispatch] = React.useReducer(appReducer, appState);
 
   React.useEffect(() => {
     (() => {
-      const currentTheme = localStorage.getItem("theme");
-
+      const currentTheme = theme.getCurrentTheme();
       dispatch({
         type: SET_THEME,
         payload: {
@@ -29,7 +29,7 @@ function App() {
       });
     })();
   }, []);
-  return (
+  return state.theme ? (
     <AppContext.Provider value={{ state, dispatch }}>
       <ThemeProvider
         theme={state.theme === DARK_THEME ? darkTheme : lightTheme}
@@ -45,6 +45,8 @@ function App() {
         <GlobalStyles />
       </ThemeProvider>
     </AppContext.Provider>
+  ) : (
+    <div>loading</div>
   );
 }
 

@@ -16,7 +16,7 @@ const mockState: State = {
 describe("Navbar renders correctly with correct theme icon", () => {
   // Mock the context value to provide the theme state
   const dispatch = jest.fn();
-  it("Should render with light theme", () => {
+  test("Should render with light theme", () => {
     const state = { ...mockState };
     render(
       <AppContext.Provider value={{ state, dispatch }}>
@@ -29,7 +29,7 @@ describe("Navbar renders correctly with correct theme icon", () => {
     // Expecting the text "Ottonova" to be present in the Navbar
     expect(screen.getByTestId("dark_icon")).toBeInTheDocument();
   });
-  it("Should render with dark icon", () => {
+  test("Should render with dark icon", () => {
     const state = { ...mockState, theme: DARK_THEME };
     render(
       <AppContext.Provider value={{ state, dispatch }}>
@@ -42,7 +42,7 @@ describe("Navbar renders correctly with correct theme icon", () => {
     // Expecting the text "Ottonova" to be present in the Navbar
     expect(screen.getByTestId("light_icon")).toBeInTheDocument();
   });
-  it("Should switch to light mode", () => {
+  test("Should switch to dark mode", () => {
     const state = { ...mockState, theme: LIGHT_THEME };
     render(
       <AppContext.Provider value={{ state, dispatch }}>
@@ -59,7 +59,7 @@ describe("Navbar renders correctly with correct theme icon", () => {
     });
   });
 
-  it("Should switch to dark mode", () => {
+  test("Should switch to light mode", () => {
     const state = { ...mockState, theme: DARK_THEME };
     render(
       <AppContext.Provider value={{ state, dispatch }}>
