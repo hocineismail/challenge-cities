@@ -1,10 +1,11 @@
-# Solution: [#Demo](https://deploy-dev--famous-palmier-e79f2f.netlify.app/)
+# Solution: [#Demo](https://challenge-cities.netlify.app/)
 
 <div style="display: flex; flex-direction: row;">
   <img src="https://github.com/hocineismail/challenge-cities-card/blob/main/examples/example_1.png?raw=true" alt="Example 1" width="400" />
   <img src="https://github.com/hocineismail/challenge-cities-card/blob/main/examples/example-2.png?raw=true" alt="Example 2" width="400" />
 </div>
-## Features
+
+# Features:
 
 1. **Technology Stack:**
 
@@ -56,7 +57,7 @@ To run program, run the following command.
 
 # Setup and Usage
 
-1. Clone the repository: `git clone https://github.com/hocineismail/challenge-cities-card.git`
+1. Clone the repository: `git clone https://github.com/hocineismail/challenge-cities.git`
 
 ## 🔨 Running Code (backend)
 
@@ -65,7 +66,7 @@ To run program, run the following command.
 1. Use the terminal to execute the following commands:
    - Use `cd ottonova-backend` to navigate to the "ottonova-backend" directory where the backend code is located
    - Use `npm install` or `yarn install` to install the dependencies for the Backend.
-   - Use`npm start` or `npm start:nodemon`to start the the application
+   - Use `npm start` or `yarn start` to start the the application, or `npm run start:nodemon` if you have nodemon installed.
 
 ### 🔨 Running Test
 
@@ -101,7 +102,7 @@ To run program, run the following command.
 
 ## 🌐 Links
 
-- [Deployed] [DEMO](https://deploy-dev--famous-palmier-e79f2f.netlify.app/)
+- [Deployed] [DEMO](https://challenge-cities.netlify.app/)
 
 ## Author
 
