@@ -88,25 +88,28 @@ export class Cache extends Storage {
 
     public setStorage(key: string, value: unknown, expirationSeconds = 0) {
         const expiration =
-            Date.now() + expirationSeconds * 1000
+            expirationSeconds > 0 ? Date.now() + expirationSeconds * 1000 : 0;
         const cacheKey = this.getCacheKey(key);
         const cachedItem = { data: value, expiration };
 
-        this.setItem(cacheKey, JSON.stringify(cachedItem));
+        window.localStorage.setItem(cacheKey, JSON.stringify(cachedItem));
+
     }
 
     public getStorage(key: string) {
         const cacheKey = this.getCacheKey(key);
+
         const cachedItemString = window.localStorage.getItem(cacheKey);
+
+
         if (cachedItemString) {
             const cachedItem = JSON.parse(cachedItemString);
-            if (!cachedItem.expiration || cachedItem.expiration >= Date.now()) {
-                return cachedItem.data;
+            if (cachedItem.expiration && cachedItem.expiration >= Date.now()) {
+                return cachedItem;
             } else {
                 // Remove expired data from the cache
-                return null
                 window.localStorage.removeItem(cacheKey);
-
+                return null;
             }
         }
         return null;
@@ -122,8 +125,9 @@ export class Cache extends Storage {
     }
 
     public isExpired(key: string) {
-        const cacheKey = this.getCacheKey(key);
-        const cachedItemString = this.getStorage(cacheKey);
+
+        const cachedItemString = this.getStorage(key);
+
         if (cachedItemString) {
             const cachedItem = JSON.parse(cachedItemString);
             return cachedItem.expiration > 0 && cachedItem.expiration < Date.now();
@@ -131,13 +135,6 @@ export class Cache extends Storage {
         return true;
     }
 
-    public getData(key: string) {
-        if (!this.isExpired(key)) {
-            return this.getStorage(key);
-        } else {
-            // Fetch data and store it in the cache
-            return null;
-        }
-    }
+
 }
 

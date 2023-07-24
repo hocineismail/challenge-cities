@@ -19,44 +19,59 @@ interface ApiResponse<T> {
     isLoading: boolean;
     errors: string | null;
 }
+// Create a single instance of the Cache class
+const cacheInstance = Cache.getInstance();
 export default function useFetchDataFromUrl<T>({ url, request }: Props): ApiResponse<T> {
-    // Create a single instance of the Cache class
-    const cacheInstance = Cache.getInstance();
+
+
+    const [data, setData] = React.useState<T | undefined>(undefined);
+
+    const [isLoading, setIsLoading] = React.useState<boolean>(true);
+    const [errors, setErrors] = React.useState<string | null>(null);
+
+
     // useCalback to memoize the fetchData function
     const fetchData = useCallback(async () => {
         try {
-            // Check if data is catched to optimze requests
-            const result = cacheInstance.getData(request);
+            // Check if data is catched to optimze requests 
+            const result = cacheInstance.getStorage(request);
 
             if (result) {
-                console.log("getData from cache")
-                setIsLoading(false);
-                setData(result);
+                //use stored data
+                // that will reduce requests numbers
+                const { data } = result
+
+                setTimeout(() => {
+                    setIsLoading(false);
+                    setData(data);
+                }, 1000);
             } else {
-                // if data is not exit on cache we will fetch new request
+
+                // if data is not exist on the cache we will send new request to get data and store it on the cache
+                // the cache has an expiration time
                 const response = await fetch(url);
                 if (response.ok) {
                     const responseData = await response.json();
-                    console.log("getData from request")
                     //86400s  to store our date for one day
-                    cacheInstance.setStorage(request, responseData, 86400)
-                    setIsLoading(false);
-                    setData(responseData);
+                    cacheInstance.setStorage(request, responseData, 10000)
+
+                    setTimeout(() => {
+                        setIsLoading(false);
+                        setData(responseData);
+                    }, 1000);
                 } else {
                     throw new Error('Request failed');
                 }
             }
 
         } catch (error) {
-            setIsLoading(false);
-            setErrors('Oooups!!! Something went Wrong');
+
+            setTimeout(() => {
+                setIsLoading(false);
+                setErrors('Oooups!!! Something went Wrong');
+            }, 1000);
         }
     }, [url, request]);
-
-    const [data, setData] = React.useState<T | undefined>(undefined);
-
-    const [isLoading, setIsLoading] = React.useState<boolean>(true);
-    const [errors, setErrors] = React.useState<string | null>(null);
 
     // fetchData function will be called if url is updated and exist 
     useEffect(() => {
